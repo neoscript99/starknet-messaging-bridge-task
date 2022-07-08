@@ -1,43 +1,32 @@
-import * as dotenv from "dotenv";
+import { HardhatUserConfig } from "hardhat/config";
+import "@nomicfoundation/hardhat-toolbox";
 
-import { HardhatUserConfig, task } from "hardhat/config";
-import "@nomiclabs/hardhat-etherscan";
-import "@nomiclabs/hardhat-waffle";
-import "@typechain/hardhat";
-import "hardhat-gas-reporter";
-import "solidity-coverage";
+// Go to https://infura.io/ and create a new project
+// Replace this with your Infura project ID
+const INFURA_PROJECT_ID = "9f0e54ba793a45b2bf4574bbd51ad990";
 
-dotenv.config();
-
-// This is a sample Hardhat task. To learn how to create your own go to
-// https://hardhat.org/guides/create-task.html
-task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
-  const accounts = await hre.ethers.getSigners();
-
-  for (const account of accounts) {
-    console.log(account.address);
-  }
-});
-
-// You need to export an object to set up your config
-// Go to https://hardhat.org/config/ to learn more
+// Replace this private key with your Ropsten account private key
+// To export your private key from Metamask, open Metamask and
+// go to Account Details > Export Private Key
+// Be aware of NEVER putting real Ether into testing accounts
+const KEY1 = "9ded064a0884e3d63444d218dbb584c4778d5b8c4cf5a04d470682df5012a2a5";
 
 const config: HardhatUserConfig = {
-  solidity: "0.8.4",
+  solidity: "0.8.9",
   networks: {
-    ropsten: {
-      url: process.env.ROPSTEN_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    hardhat: {
+      chainId: 1337
     },
-  },
-  gasReporter: {
-    enabled: process.env.REPORT_GAS !== undefined,
-    currency: "USD",
+    goerli: {
+      url: `https://goerli.infura.io/v3/${INFURA_PROJECT_ID}`,
+      accounts: [`0x${KEY1}`]
+    }
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY,
-  },
+    apiKey: {
+      goerli: 'CBQFESP5U5J7XBNBQFDHCAH529U166SV9B'
+    }
+  }
 };
 
 export default config;
