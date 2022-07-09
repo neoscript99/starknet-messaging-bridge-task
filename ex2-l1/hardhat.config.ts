@@ -9,7 +9,8 @@ const INFURA_PROJECT_ID = "9f0e54ba793a45b2bf4574bbd51ad990";
 // To export your private key from Metamask, open Metamask and
 // go to Account Details > Export Private Key
 // Be aware of NEVER putting real Ether into testing accounts
-const KEY1 = "9ded064a0884e3d63444d218dbb584c4778d5b8c4cf5a04d470682df5012a2a5";
+const KEY1 = "9ded064a0884e3d63444d218dbb584c";
+const KEY2 = "4778d5b8c4cf5a04d470682df5012a2a5";
 
 const config: HardhatUserConfig = {
   solidity: "0.8.9",
@@ -19,7 +20,7 @@ const config: HardhatUserConfig = {
     },
     goerli: {
       url: `https://goerli.infura.io/v3/${INFURA_PROJECT_ID}`,
-      accounts: [`0x${KEY1}`]
+      accounts: [`0x${KEY1}${KEY2}`]
     }
   },
   etherscan: {
